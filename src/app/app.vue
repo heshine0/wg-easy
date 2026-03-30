@@ -19,6 +19,8 @@ toast.setToast(toastRef);
 // make sure to fetch release early
 useGlobalStore();
 
+const baseURL = useRuntimeConfig().app.baseURL || '/';
+
 useHead({
   bodyAttrs: {
     class: 'bg-gray-50 dark:bg-neutral-800',
@@ -26,16 +28,16 @@ useHead({
   link: [
     {
       rel: 'manifest',
-      href: '/manifest.json',
+      href: `${baseURL}manifest.json`,
     },
     {
       rel: 'icon',
       type: 'image/png',
-      href: '/favicon.png',
+      href: `${baseURL}favicon.png`,
     },
     {
       rel: 'apple-touch-icon',
-      href: '/apple-touch-icon.png',
+      href: `${baseURL}apple-touch-icon.png`,
     },
   ],
   meta: [
