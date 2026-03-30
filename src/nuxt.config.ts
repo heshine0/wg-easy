@@ -7,6 +7,9 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2026-02-06',
   devtools: { enabled: true },
+  app: {
+    baseURL: '/wg',
+  },
   modules: [
     '@nuxtjs/i18n',
     '@nuxtjs/tailwindcss',
@@ -157,6 +160,7 @@ export default defineNuxtConfig({
     externals: {
       traceInclude: [fileURLToPath(new URL('./cli/index.ts', import.meta.url))],
     },
+    baseURL: '/wg',
   },
   alias: {
     // for typecheck reasons (https://github.com/nuxt/cli/issues/323)

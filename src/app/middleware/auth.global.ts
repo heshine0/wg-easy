@@ -1,6 +1,8 @@
 export default defineNuxtRouteMiddleware(async (to) => {
+  const baseURL = useRuntimeConfig().app.baseURL || '/';
+
   // api & setup handled server side
-  if (to.path.startsWith('/api/') || to.path.startsWith('/setup')) {
+  if (to.path.startsWith(`${baseURL}api/`) || to.path.startsWith(`${baseURL}setup`)) {
     return;
   }
 
@@ -10,7 +12,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   authStore.userData = await authStore.getSession(event);
 
   // skip login if already logged in
-  if (to.path === '/login') {
+  if (to.path === `${baseURL}login`) {
     if (authStore.userData?.username) {
       return navigateTo('/', { redirectCode: 302 });
     }
@@ -23,7 +25,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   // Check for admin access
-  if (to.path.startsWith('/admin')) {
+  if (to.path.startsWith(`${baseURL}admin`)) {
     if (!hasPermissions(authStore.userData, 'admin', 'any')) {
       return abortNavigation('Not allowed to access Admin Panel');
     }
