@@ -14,14 +14,14 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // skip login if already logged in
   if (to.path === `${baseURL}login`) {
     if (authStore.userData?.username) {
-      return navigateTo('/', { redirectCode: 302 });
+      return navigateTo(baseURL, { redirectCode: 302 });
     }
     return;
   }
 
   // Require auth for every page other than Login
   if (!authStore.userData?.username) {
-    return navigateTo('/login', { redirectCode: 302 });
+    return navigateTo(`${baseURL}login`, { redirectCode: 302 });
   }
 
   // Check for admin access
